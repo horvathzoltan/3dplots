@@ -63,7 +63,7 @@ void MainWindow::on_pushButton_clicked()
         auto r = a[0].toFloat();
         auto g = a[1].toFloat();
         auto b = a[2].toFloat();
-        auto d = (a[3].replace(',','.').toFloat())/70.0f;
+        auto d = (a[3].replace(',','.').toFloat())/30.0f;
         if(d>1.0f) d = 1.0f;
         auto s = new QtDataVisualization::QScatter3DSeries();
         s->setItemSize(d);
