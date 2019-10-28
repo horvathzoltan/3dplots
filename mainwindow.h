@@ -14,7 +14,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
     QtDataVisualization::Q3DScatter *scatter;
-    QtDataVisualization::QScatter3DSeries *series;
+    QList<QtDataVisualization::QScatter3DSeries*> series;
     //QtDataVisualization::QScatterDataArray *data;
 
 public:
