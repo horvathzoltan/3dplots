@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui datavisualization
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -43,6 +43,7 @@ LIBS += -L$$HOME/$$COMMON_LIBS/ -lshortguid
 #LIBS += -L$$HOME/$$COMMON_LIBS/ -linihelper
 #LIBS += -L$$HOME/$$COMMON_LIBS/ -lsettingshelper
 #LIBS += -L$$HOME/$$COMMON_LIBS/ -lxmlhelper
+LIBS += -L$$HOME/$$COMMON_LIBS/ -ltextfilehelper
 }
 
 INCLUDEPATH += $$HOME/common
