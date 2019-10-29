@@ -6,9 +6,11 @@
 #include <QScatterDataItem>
 #include <QtDataVisualization>
 #include <Q3DTheme>
+#include <QString>
 #include "common/logger/log.h"
 #include "common/helper/textfilehelper/textfilehelper.h"
 #include "common/macrofactory/macro.h"
+#include "scatterhelper.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -17,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     this->scatter = new QtDataVisualization::Q3DScatter();
+    ScatterHelper::init(scatter);
     auto container = QWidget::createWindowContainer(scatter);
     QHBoxLayout *hLayout = new QHBoxLayout(ui->widget1);
     hLayout->addWidget(container, 1);
@@ -26,6 +29,9 @@ MainWindow::MainWindow(QWidget *parent)
     scatter->axisY()->setMax(255);
     scatter->axisZ()->setMin(0);
     scatter->axisZ()->setMax(255);
+    scatter->axisX()->setTitle(QStringLiteral("R"));
+    scatter->axisY()->setTitle(QStringLiteral("G"));
+    scatter->axisZ()->setTitle(QStringLiteral("B"));
 
     //ui->widget1->add
     scatter->setFlags(scatter->flags() ^ Qt::FramelessWindowHint);
@@ -48,10 +54,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    zTrace();
-
-    //series->dataProxy()->addItem(QVector3D(0.2f*i, 0.2f*i, 0.2f)*i);
-    //auto fn = com::helper::File
+    //zTrace();
     auto fn = QFileDialog::getOpenFileName(this,tr("Open CSV"), "C:/ColorData", tr("CSV Files (*.csv)"));
     auto strs = com::helper::TextFileHelper::loadLines(fn);
 
@@ -60,30 +63,12 @@ void MainWindow::on_pushButton_clicked()
         if(str->startsWith('#')) continue;
         auto a = str->split(';');
         if(a.length()<4) continue;
-        auto r = a[0].toFloat();
-        auto g = a[1].toFloat();
-        auto b = a[2].toFloat();
-        auto d = (a[3].replace(',','.').toFloat())/30.0f;
-        if(d>1.0f) d = 1.0f;
-        auto s = new QtDataVisualization::QScatter3DSeries();
-        s->setItemSize(d);
-        auto c = QColor(r, g, b);
-
-//        QLinearGradient linearGrad(QPointF(100, 100), QPointF(200, 200));
-//        linearGrad.setColorAt(0, c);
-//        auto c2 = QColor(r*1.1f, g*1.1f, b*1.1f);
-//        linearGrad.setColorAt(1, c2);
-//        s->setBaseGradient(linearGrad);
-
-        s->setBaseColor(c);
-        //s->setColorStyle(QtDataVisualization::Q3DTheme::ColorStyle::ColorStyleObjectGradient);
-        series.append(s);
-        scatter->addSeries(s);
-
-
-        s->dataProxy()->addItem(QtDataVisualization::QScatterDataItem(
-            QVector3D(r, g, b)));
-
+        ScatterHelper::AddPoint(a[0], a[1], a[2], a[3]);
     }
 
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    ScatterHelper::Clear();
 }

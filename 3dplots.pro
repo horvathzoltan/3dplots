@@ -1,4 +1,4 @@
-QT       += core gui datavisualization
+QT       += core gui datavisualization network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -52,12 +52,30 @@ DEPENDPATH += $$HOME/common
 message(includepath = $$INCLUDEPATH)
 
 SOURCES += \
+    action.cpp \
+    actionhelper.cpp \
+    actiontask.cpp \
+    dowork.cpp \
+    httpthreadedserver.cpp \
     main.cpp \
     mainwindow.cpp \
+    request.cpp \
+    response.cpp \
+    scatterhelper.cpp \
+    threadedsockethandler.cpp \
     work1.cpp
 
 HEADERS += \
+    action.h \
+    actionhelper.h \
+    actiontask.h \
+    dowork.h \
+    httpthreadedserver.h \
     mainwindow.h \
+    request.h \
+    response.h \
+    scatterhelper.h \
+    threadedsockethandler.h \
     work1.h
 
 FORMS += \

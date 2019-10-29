@@ -1,13 +1,16 @@
-    #include "mainwindow.h"
+#include "mainwindow.h"
 #include "common/logger/log.h"
 #include "common/helper/signalhelper/signalhelper.h"
 #include "common/helper/CommandLineParserHelper/commandlineparserhelper.h"
 #include "common/coreappworker/coreappworker.h"
-
 #include <QApplication>
 #include <QCommandLineParser>
-
 #include "work1.h"
+#include "dowork.h"
+#include "httpthreadedserver.h"
+#include "common/macrofactory/macro.h"
+
+HTTPThreadedServer server(QStringLiteral("piapi2"));
 
 int main(int argc, char *argv[])
 {
@@ -40,6 +43,11 @@ int main(int argc, char *argv[])
     Work1::params.inFile = parser.value(OPTION_IN);
     Work1::params.outFile = parser.value(OPTION_OUT);
     Work1::params.isBackup = parser.isSet(OPTION_BACKUP);
+
+
+    server.setHostAddress(QHostAddress::Any, 8080);
+    server.addAction(Request::Method::GET, nameof(&doWork::add), &doWork::add);
+    server.start();
 
     MainWindow w;
     w.show();
