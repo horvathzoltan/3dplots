@@ -47,9 +47,15 @@ int main(int argc, char *argv[])
 
     server.setHostAddress(QHostAddress::Any, 8080);
     server.addAction(Request::Method::GET, nameof(&doWork::add), &doWork::add);
+    server.addAction(Request::Method::GET, nameof(&doWork::testconnection), &doWork::testconnection);
+    server.addAction(Request::Method::GET, nameof(&doWork::clear), &doWork::clear);
+    server.addAction(Request::Method::GET, nameof(&doWork::del), &doWork::del); //n
+    server.addAction(Request::Method::GET, nameof(&doWork::mov), &doWork::mov); //n,rgb
+    //server.addAction(Request::Method::GET, nameof(&doWork::siz), &doWork::siz); //n,d
     server.start();
 
     MainWindow w;
+    doWork::init(&w);
     w.show();
     auto e = QApplication::exec();
     return e;

@@ -19,14 +19,24 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    ~MainWindow();    
 
 private slots:
     void on_pushButton_clicked();
-
     void on_pushButton_2_clicked();
+    void onClearPoints();
+    void onDeletePoint(const QString &n);
+    void onMovePoint(const QString &,
+                     const QString &, const QString &, const QString &,
+                     const QString &);
+
+signals:
+    void clearPoints();
+    //void deletePoint(const QString&);
+
 
 private:
     Ui::MainWindow *ui;
+
 };
 #endif // MAINWINDOW_H

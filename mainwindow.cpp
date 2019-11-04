@@ -18,8 +18,11 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    connect(this, SIGNAL(clearPoints()),this, SLOT(onClearPoints()));
+    //connect(this, SIGNAL(deletePoint()),this, SLOT(onDeletePoint()));
+
     this->scatter = new QtDataVisualization::Q3DScatter();
-    ScatterHelper::init(scatter);
+    ScatterHelper::init(scatter);    
     auto container = QWidget::createWindowContainer(scatter);
     QHBoxLayout *hLayout = new QHBoxLayout(ui->widget1);
     hLayout->addWidget(container, 1);
@@ -57,18 +60,40 @@ void MainWindow::on_pushButton_clicked()
     //zTrace();
     auto fn = QFileDialog::getOpenFileName(this,tr("Open CSV"), "C:/ColorData", tr("CSV Files (*.csv)"));
     auto strs = com::helper::TextFileHelper::loadLines(fn);
-
+    int i =0;
     zforeach(str, strs){
         if(str->isEmpty()) continue;
         if(str->startsWith('#')) continue;
         auto a = str->split(';');
         if(a.length()<4) continue;
-        ScatterHelper::AddPoint(a[0], a[1], a[2], a[3]);
+        auto n = QString::number(i++);        
+        ScatterHelper::AddPoint(a[0], a[1], a[2], a[3], n);
     }
 
 }
 
-void MainWindow::on_pushButton_2_clicked()
+void MainWindow::onClearPoints()
 {
     ScatterHelper::Clear();
+}
+
+
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    emit clearPoints();
+}
+
+
+void MainWindow::onDeletePoint(const QString &n)
+{
+    ScatterHelper::Delete(n);
+}
+
+void MainWindow::onMovePoint(const QString &n,
+                             const QString &r,const QString &g,const QString &b,
+                             const QString &d)
+{
+    zTrace();
+    ScatterHelper::Move(n, r, g, b, d);
 }

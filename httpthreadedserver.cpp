@@ -75,5 +75,6 @@ void HTTPThreadedServer::addAction(QString m, QString p, actionFn fn)
 
 const Action* HTTPThreadedServer::action(Request r)
 {
-    return ActionHelper::find(actions, r);
+    auto a = ActionHelper::find(actions, r);
+    return a;
 }
