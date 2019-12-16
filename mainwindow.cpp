@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     connect(this, SIGNAL(clearPoints()),this, SLOT(onClearPoints()));
-    //connect(this, SIGNAL(deletePoint()),this, SLOT(onDeletePoint()));
+    connect(this, SIGNAL(countChanged()),this, SLOT(onCountChanged()));
 
     this->scatter = new QtDataVisualization::Q3DScatter();
     ScatterHelper::init(scatter);    
@@ -96,4 +96,9 @@ void MainWindow::onMovePoint(const QString &n,
 {
     zTrace();
     ScatterHelper::Move(n, r, g, b, d);
+}
+
+void MainWindow::onCountChanged(){
+    auto n = scatter->seriesList().count();
+    ui->lcdNumber->display(n);
 }

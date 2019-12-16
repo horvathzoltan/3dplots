@@ -29,9 +29,11 @@ private slots:
     void onMovePoint(const QString &,
                      const QString &, const QString &, const QString &,
                      const QString &);
+    void onCountChanged();
 
 signals:
     void clearPoints();
+    void countChanged();
     //void deletePoint(const QString&);
 
 

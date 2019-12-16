@@ -42,8 +42,9 @@ void ScatterHelper::AddPoint(const QString &a0, const QString &a1, const QString
     sc_->addSeries(s);
     s->dataProxy()->addItem(
         QtDataVisualization::QScatterDataItem(QVector3D(r, g, b))
-                );
+                );    
     zInfo(QStringLiteral("point added: %1").arg(name));
+
 //    isAddingPoint = false;
 }
 

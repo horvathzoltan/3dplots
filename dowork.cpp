@@ -20,9 +20,8 @@ ActionResult doWork::add(const QUrlQuery& param, const QByteArray& content)
     auto d = param.queryItemValue(QStringLiteral("d"));
     auto n = param.queryItemValue(QStringLiteral("n"));
     zInfo(QStringLiteral("add: r=%1 g=%2 b=%3 d=%4 n=%5").arg(r, g, b, d, n));
-
-    ScatterHelper::AddPoint(r, g, b, d, n);
-
+    ScatterHelper::AddPoint(r, g, b, d, n);    
+    emit mw_->countChanged();
     return ActionResult(QStringLiteral("added").toUtf8(), Action::contentType::TEXT);
 }
 
@@ -43,6 +42,7 @@ ActionResult doWork::clear(const QUrlQuery& param, const QByteArray& content)
 {    
     if(!isInit_) return ActionResult(QStringLiteral("not cleared").toUtf8(), Action::contentType::JSON);
     emit mw_->clearPoints();
+    emit mw_->countChanged();
     return ActionResult(QStringLiteral("cleared").toUtf8(), Action::contentType::JSON);
 }
 
@@ -51,6 +51,7 @@ ActionResult doWork::del(const QUrlQuery& param, const QByteArray& content)
     if(!isInit_) return ActionResult(QStringLiteral("not deleted").toUtf8(), Action::contentType::JSON);
     auto n = param.queryItemValue(QStringLiteral("n"));
     QMetaObject::invokeMethod(mw_, "onDeletePoint", Qt::QueuedConnection, Q_ARG(const QString&, n));
+    emit mw_->countChanged();
     return ActionResult(QStringLiteral("cleared").toUtf8(), Action::contentType::JSON);
 }
 
