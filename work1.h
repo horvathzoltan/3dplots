@@ -1,4 +1,4 @@
-#ifndef WORK1_H
+﻿#ifndef WORK1_H
 #define WORK1_H
 
 
@@ -23,3 +23,13 @@ public:
 //tesztegy
 //tesztkettő
 //t3
+//t4
+//t5
+//t6
+//t7
+//t8
+//t9
+//t10
+
+
+
