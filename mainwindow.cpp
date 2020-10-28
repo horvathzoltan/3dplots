@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include <Q3DScatter>
 #include <QFileDialog>
-#include <QScatterDataArray>
+//#include <QScatterDataArray>
 #include <QScatterDataItem>
 #include <QtDataVisualization>
 #include <Q3DTheme>

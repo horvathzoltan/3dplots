@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <Q3DScatter>
-#include <QScatterDataArray>
+//#include <QScatterDataArray>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
