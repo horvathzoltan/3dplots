@@ -6,47 +6,4 @@ eeaa
  778899
 
 qqqqq
-11111111
-2222222222222222
-33333333333
-444444444
-aaaaaaa
-sssssss
-5555555
-666666
-dddddd
- wwwwweeeeee
- 
- eeeeeeee
- e
- e
-1111111
-222
-33
-444
- e
- ee
- e
-
-44444
-55555
-66666
-eeeeeeeeee
-eeeeeeeeee
-eeeeeeeeee
-
- rrrrrrrrr
-ttttttttt
- 1111111222333333
- 12312121212231232312312
-aaaa
-bbbb
-cccc
-dddd
-eeee
-ffff
-gggg
-hhh
-iii
-jjj
-kkk
+111
