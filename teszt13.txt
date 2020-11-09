@@ -27,4 +27,8 @@ ewrwerwer
 44444
 5555
 6666
+<<<<<<< HEAD
 7777
+=======
+8888
+>>>>>>> refs/remotes/origin/master
