@@ -63,11 +63,45 @@ void MainWindow::on_pushButton_clicked()
     int i =0;
     zforeach(str, strs){
         if(str->isEmpty()) continue;
-        if(str->startsWith('#')) continue;
-        auto a = str->split(';');
-        if(a.length()<4) continue;
-        auto n = QString::number(i++);        
-        ScatterHelper::AddPoint(a[0], a[1], a[2], a[3], n);
+        bool isHex =  false;
+
+        static QRegularExpression hexMatcher("[#$]?([0-9a-fA-F]{6})", QRegularExpression::CaseInsensitiveOption);
+        auto m = hexMatcher.match(*str);
+
+        if(m.hasMatch())
+        {
+            *str= m.captured(1);
+            isHex = true;
+        }
+/*
+    RYB_RED,RYB_GREEN,RYB_BLUE,
+    RYB_YELLOW,RYB_ORANGE,RYB_PURPLE
+        */
+        if(isHex)
+        {
+            if (str->length() >= 6)
+            {
+                bool ok;
+                //auto rr = str->mid(0, 2).toInt(&ok, 16);
+                auto r = str->mid(0, 2).toInt(&ok, 16);//*16;
+                auto g = str->mid(2, 2).toInt(&ok, 16);//*16;
+                auto b = str->mid(4, 2).toInt(&ok, 16);//*16;
+                ScatterHelper::AddPoint(
+                    QString::number(r),
+                    QString::number(g),
+                    QString::number(b), "3", "u");
+            }
+        }
+        else
+        {
+            //if(str->startsWith('#')) continue;
+            auto a = str->split(';');
+            if(a.length()<4) continue;
+            auto n = QString::number(i++);
+            // r, g, b, d
+            ScatterHelper::AddPoint(a[0], a[1], a[2], a[3], n);
+        }
+        //ScatterHelper::AddPoint(a[0], a[1], a[2], a[3], n);
     }
 
 }
