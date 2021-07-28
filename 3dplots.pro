@@ -24,38 +24,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += \
-    action.cpp \
-    actionhelper.cpp \
-    actiontask.cpp \
-    dowork.cpp \
-    httpthreadedserver.cpp \
-    main.cpp \
-    mainwindow.cpp \
-    request.cpp \
-    response.cpp \
-    scatterhelper.cpp \
-    threadedsockethandler.cpp \
-    work1.cpp
-
-HEADERS += \
-    action.h \
-    actionhelper.h \
-    actiontask.h \
-    dowork.h \
-    httpthreadedserver.h \
-    mainwindow.h \
-    request.h \
-    response.h \
-    scatterhelper.h \
-    threadedsockethandler.h \
-    work1.h
-
-FORMS += \
-    mainwindow.ui
-
 unix:HOME = $$system(echo $HOME)
 win32:HOME = $$system(echo %userprofile%)
+
+message( "home = "$$HOME )
 
 CONFIG(debug, debug|release){
 BUILD = debug
@@ -63,9 +35,9 @@ BUILD = debug
 BUILD = release
 }
 
+
 COMMON = common
 COMMON_LIBS = $$COMMON"lib"
-
 
 equals(BUILD,debug) {
     #message( "build is _ debug" )
@@ -107,6 +79,7 @@ COMMON_INCLUDE_FULLPATH = $$shell_path($$HOME/$$COMMON)
 message("COMMON_LIBS_FULLPATH: " $$COMMON_LIBS_FULLPATH);
 message("COMMON_INCLUDE_FULLPATH: " $$COMMON_INCLUDE_FULLPATH);
 
+
 #unix:!macx: LIBS += -L/home/zoli/build-common-Desktop_Qt_5_12_2_GCC_64bit2-Debug/stringhelper/ -lstringhelper
 unix:!macx:
 {
@@ -127,7 +100,46 @@ LIBS += -L$$COMMON_LIBS_FULLPATH/ -ltextfilehelper
 INCLUDEPATH += $$COMMON_INCLUDE_FULLPATH
 DEPENDPATH += $$COMMON_INCLUDE_FULLPATH
 
+message(includepath = $$INCLUDEPATH)
+
+SOURCES += \
+    action.cpp \
+    actionhelper.cpp \
+    actiontask.cpp \
+    dowork.cpp \
+    httpthreadedserver.cpp \
+    main.cpp \
+    mainwindow.cpp \
+    request.cpp \
+    response.cpp \
+    scatterhelper.cpp \
+    threadedsockethandler.cpp \
+    work1.cpp
+
+HEADERS += \
+    action.h \
+    actionhelper.h \
+    actiontask.h \
+    dowork.h \
+    httpthreadedserver.h \
+    mainwindow.h \
+    request.h \
+    response.h \
+    scatterhelper.h \
+    threadedsockethandler.h \
+    work1.h
+
+FORMS += \
+    mainwindow.ui
+
+
+
+
+
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+
