@@ -81,7 +81,7 @@ bool ScatterHelper::Delete(const QString &n)
 
     auto c = FindByName(n);
     if(c) {
-        sc_->removeSeries(c);        
+        sc_->removeSeries(c);
         return true;
     }
     return false;
