@@ -58,7 +58,9 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_clicked()
 {
     //zTrace();
-    auto fn = QFileDialog::getOpenFileName(this,tr("Open CSV"), "C:/ColorData", tr("CSV Files (*.csv)"));
+    auto homedir = QDir::home();//QStandardPaths::HomeLocation;
+    QString colpath = homedir.filePath("a");
+    auto fn = QFileDialog::getOpenFileName(this,tr("Open CSV"), colpath, tr("CSV Files (*.csv *.txt)"));
     auto strs = com::helper::TextFileHelper::loadLines(fn);
     int i =0;
     zforeach(str, strs){
